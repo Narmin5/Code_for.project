@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+import matplotlib.pyplot as plt
 # Loading the TAP_Working_Memory dataset
 tap_working_memory = pd.read_csv('TAP-Working Memory.csv')
 # Cleaning the data
