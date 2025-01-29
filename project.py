@@ -36,3 +36,9 @@ models = {
     'Random Forest': RandomForestClassifier(),
     'Support Vector Machine': SVC()
 }
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f'{name} Accuracy: {accuracy:.2f}')
+
