@@ -68,3 +68,12 @@ best_model.fit(X_train, y_train)
 
 
 y_pred = best_model.predict(X_test)
+
+# Print evaluation metrics
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nClassification Report:")
+
+
+print(classification_report(y_test, y_pred))
