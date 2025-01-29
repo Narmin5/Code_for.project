@@ -22,3 +22,7 @@ cleaned_data.loc[153:, 'Age_Group'] = 'older'
 # Define features (X) and target labels (y)
 X = cleaned_data.drop(columns=['ID', 'Age_Group'])
 y = cleaned_data['Age_Group']
+
+# Encode labels to binary (0 = young, 1 = older)
+y = y.map({'young': 0, 'older': 1})
+
