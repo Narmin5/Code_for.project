@@ -61,3 +61,10 @@ plt.ylabel('Inertia')
 plt.grid(True)
 plt.show()
 
+# Assuming Random Forest is the best model
+best_model = RandomForestClassifier()
+
+best_model.fit(X_train, y_train)
+
+
+y_pred = best_model.predict(X_test)
