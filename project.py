@@ -1,6 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from sklearn. ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
 # Loading the TAP_Working_Memory dataset
 tap_working_memory = pd.read_csv('TAP-Working Memory.csv')
@@ -41,4 +43,21 @@ for name, model in models.items():
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     print(f'{name} Accuracy: {accuracy:.2f}')
+
+# K-Means clustering with the elbow method
+k_values = range(1, 11)
+inertia = []
+
+for k in k_values:
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(X)
+    inertia.append(kmeans.inertia_)
+
+plt.figure(figsize=(8, 5))
+plt.plot(k_values, inertia, marker='o')
+plt.title('Elbow Method')
+plt.xlabel('Number of Clusters (k)')
+plt.ylabel('Inertia')
+plt.grid(True)
+plt.show()
 
