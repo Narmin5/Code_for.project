@@ -26,3 +26,5 @@ y = cleaned_data['Age_Group']
 # Encode labels to binary (0 = young, 1 = older)
 y = y.map({'young': 0, 'older': 1})
 
+# Split into training and testing datasets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
