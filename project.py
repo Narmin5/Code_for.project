@@ -18,3 +18,7 @@ cleaned_data = tap_working_memory.dropna()
 # Assigning age groups based on index range
 cleaned_data['Age_Group'] = 'young'
 cleaned_data.loc[153:, 'Age_Group'] = 'older'
+
+# Define features (X) and target labels (y)
+X = cleaned_data.drop(columns=['ID', 'Age_Group'])
+y = cleaned_data['Age_Group']
