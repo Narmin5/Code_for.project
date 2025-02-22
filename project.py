@@ -39,3 +39,56 @@ def classify_age_group(age):
     else:
         return "unknown"
 
+
+
+# Apply function to create Age_Group column
+merged_data['Age_Group'] = merged_data['Age'].apply(classify_age_group)
+
+
+# Correlation matrix
+plt.figure(figsize=(10, 6))
+sns.heatmap(numeric_data.corr(), annot=True, cmap='coolwarm', fmt=".2f")
+plt.title("Correlation Matrix")
+plt.show()
+
+
+# Define features (X) and target labels (y)
+X = merged_data.drop(columns=['ID', 'Age', 'Age_Group'])
+y = merged_data['Age_Group']
+# Ensure there are no NaN values in y
+print(y.isna().sum())
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train models
+models = {
+    'Logistic Regression': LogisticRegression(max_iter=1000),
+    'Random Forest': RandomForestClassifier(),
+    'Support Vector Machine': SVC()
+}
+
+# Train and evaluate models
+best_model_name = None
+best_accuracy = 0
+best_model = None
+
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f'{name} Accuracy: {accuracy:.2f}')
+
+print(f"\nBest Model: {best_model_name} with accuracy {best_accuracy:.2f}")
+
+# Confusion matrix and classification report for the best model 
+best_model = RandomForestClassifier()
+best_model.fit(X_train, y_train)
+y_pred = best_model.predict(X_test)
+
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+
